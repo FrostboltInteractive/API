@@ -1,5 +1,5 @@
 from flask import Flask, jsonify
-from Endpoints.getServerList import getServerList  # Correct import
+from getServerList import getServerList  # Correct import
 
 
 app = Flask(__name__)
