@@ -1,5 +1,5 @@
 from flask import Flask
-import Endpoints
+from Endpoints import getServerList
 
 app = Flask(__name__)
 
