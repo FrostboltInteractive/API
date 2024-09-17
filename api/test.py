@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from Endpoints import getServerList
 
 app = Flask(__name__)
@@ -8,5 +8,5 @@ def home():
     return 'Hello, World!'
 
 @app.route('/')
-def about():
-    return getServerList()
+def handleGetServerList():
+    return jsonify(getServerList())
