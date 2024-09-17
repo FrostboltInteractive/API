@@ -7,6 +7,6 @@ app = Flask(__name__)
 def home():
     return 'Hello, World!'
 
-@app.route('/')
+@app.route('/getServerList')
 def handleGetServerList():
     return jsonify(getServerList())
