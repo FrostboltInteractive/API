@@ -1,4 +1,5 @@
 from flask import Flask
+import Endpoints
 
 app = Flask(__name__)
 
@@ -6,6 +7,6 @@ app = Flask(__name__)
 def home():
     return 'Hello, World!'
 
-@app.route('/about')
+@app.route('/')
 def about():
-    return 'good anakin good'  
+    return getServerList()

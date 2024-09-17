@@ -1,1 +1,0 @@
-//checks to see if manage.py is running starts it if it is not it restarts it. runs every 10 mins
