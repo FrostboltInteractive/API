@@ -24,6 +24,6 @@ def home():
 
 @app.route('/getServerList')
 def handleGetServerList():
-    res = getServerList()
+    res = list(getServerList())
     return Response(json.dumps(res), mimetype='application/json')
 
