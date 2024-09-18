@@ -1,5 +1,4 @@
-from requests import Response
-from flask import Flask
+from flask import Flask, Response
 import json
 #from getServerList import getServerList  # Correct import
 
