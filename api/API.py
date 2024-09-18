@@ -11,7 +11,7 @@ def getServerList():
     #4 = playercount
     #5 = id
     servers = []
-    with open("../Data/Servers.txt", 'r') as file:
+    with open("Data/Servers.txt", 'r') as file:
         for line in file:
             ip, port, status, region, playercount, id = line.strip().split(',')
             servers.append({
