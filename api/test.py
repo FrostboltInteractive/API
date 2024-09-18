@@ -24,5 +24,5 @@ def home():
 
 @app.route('/getServerList')
 def handleGetServerList():
-    return jsonify(getServerList())
+    return getServerList()
 
