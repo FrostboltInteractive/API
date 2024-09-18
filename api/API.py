@@ -1,4 +1,4 @@
-from flask import Flask, Response
+from flask import Flask, Response, request
 import json
 
 #Endpoints
@@ -15,8 +15,8 @@ def getServerList():
     #TODO loop to get all servers and set their data in the array
     return servers
 
-def addServer():
-    #TODO add a server to the list
+def addServer(data):
+    
     return ""
 
 def removeServer():
@@ -47,6 +47,13 @@ def leastLoadedMachine():
     #TODO get the machine with the least amount of servers
     return ""
 
+def addMachine():
+    #TODO add a machine
+    return ""
+
+def removeMachine():
+    #TODO remove a machine
+    return ""
 
 
 app = Flask(__name__)
@@ -60,3 +67,8 @@ def handleGetServerList():
     res = list(getServerList())
     return Response(json.dumps(res), mimetype='application/json')
 
+@app.route('/addServer', methods=['POST'])
+def handleAddServer():
+    data = request.get_json()  # Get the JSON data from the POST request
+    res = addServer(data)
+    return Response(json.dumps(res), mimetype='application/json')
