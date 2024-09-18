@@ -1,3 +1,4 @@
+from requests import Response
 from flask import Flask
 import json
 #from getServerList import getServerList  # Correct import
@@ -24,5 +25,5 @@ def home():
 
 @app.route('/getServerList')
 def handleGetServerList():
-    return json.dumps(getServerList())
+    return Response(json.dumps(getServerList),  mimetype='application/json')
 
