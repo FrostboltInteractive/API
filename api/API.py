@@ -74,11 +74,12 @@ def home():
 @app.route('/getServerList')
 def handleGetServerList():
     res = getServerList()
-    response = Response(json.dumps(res), mimetype='application/json')
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    response.headers.add('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-    response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
-    return response
+    #response = Response(json.dumps(res), mimetype='application/json')
+    #response.headers.add('Access-Control-Allow-Origin', '*')
+    #response.headers.add('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+    #response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+    #return response
+    return Response(json.dumps(res), mimetype='application/json')
 
 
 @app.route('/addServer', methods=['POST'])
