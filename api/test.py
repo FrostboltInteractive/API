@@ -13,7 +13,7 @@ def getServerList():
 		{"0.0.0.0", "1", "ok", "usEast", 0, 1}
 	]
     #TODO loop to get all servers and set their data in the array
-	return json.dumps(servers)
+	return servers
 
 
 app = Flask(__name__)
