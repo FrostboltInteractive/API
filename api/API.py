@@ -59,7 +59,7 @@ def removeMachine():
 
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "https://oceansedge.frostboltinteractive.com"}})  # Enable CORS for the specified origin
+CORS(app)
 
 @app.route('/')
 def home():
