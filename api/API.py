@@ -1,6 +1,5 @@
 from flask import Flask, Response, request
 import json
-from flask_cors import CORS
 
 
 #Endpoints
@@ -59,7 +58,6 @@ def removeMachine():
 
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://oceansedge.frostboltinteractive.com"}})
 
 @app.route('/')
 def home():
@@ -68,10 +66,7 @@ def home():
 @app.route('/getServerList')
 def handleGetServerList():
     res = getServerList()
-    response = Response(json.dumps(res), mimetype='application/json')
-    response.headers.add('Access-Control-Allow-Origin', 'http://oceansedge.frostboltinteractive.com')
-    response.headers.add('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-    response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+    return Response(json.dumps(res), mimetype='application/json')
 
 @app.route('/addServer', methods=['POST'])
 def handleAddServer():
