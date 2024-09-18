@@ -1,5 +1,7 @@
 from flask import Flask, Response, request
 import json
+from flask_cors import CORS
+
 
 #Endpoints
 def getServerList():
@@ -57,6 +59,7 @@ def removeMachine():
 
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "https://oceansedge.frostboltinteractive.com"}})  # Enable CORS for the specified origin
 
 @app.route('/')
 def home():
