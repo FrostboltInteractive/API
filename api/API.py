@@ -10,10 +10,18 @@ def getServerList():
     #3 = region
     #4 = playercount
     #5 = id
-    servers = [
-        {"ip": "0.0.0.0", "port": 1, "status": "ok", "region": "usEast", "playercount": 0, "id": 1}
-    ]
-    #TODO loop to get all servers and set their data in the array
+    servers = []
+    with open("../Data/Servers.txt", 'r') as file:
+        for line in file:
+            ip, port, status, region, playercount, id = line.strip().split(',')
+            servers.append({
+                "ip": ip,
+                "port": int(port),
+                "status": status,
+                "region": region,
+                "playercount": int(playercount),
+                "id": int(id)
+            })
     return servers
 
 def addServer(data):
@@ -66,7 +74,12 @@ def home():
 @app.route('/getServerList')
 def handleGetServerList():
     res = getServerList()
-    return Response(json.dumps(res), mimetype='application/json')
+    response = Response(json.dumps(res), mimetype='application/json')
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+    return response
+
 
 @app.route('/addServer', methods=['POST'])
 def handleAddServer():
