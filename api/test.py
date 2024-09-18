@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask
 import json
 #from getServerList import getServerList  # Correct import
 
@@ -24,5 +24,5 @@ def home():
 
 @app.route('/getServerList')
 def handleGetServerList():
-    return jsonify(getServerList())
+    return json.dumps(getServerList())
 
