@@ -5,7 +5,7 @@ import os
 #Endpoints
 def getServerList():
     servers = []
-    file_path = "Servers.txt"
+    file_path = "Servers.list"
     try:
         with open(file_path, 'r') as file:
             for line in file:
