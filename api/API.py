@@ -16,8 +16,36 @@ def getServerList():
     return servers
 
 def addServer():
+    #TODO add a server to the list
+    return
 
 def removeServer():
+    #TODO remove a server from the list
+    return
+
+def updateServer():
+    #TODO update the server data
+    return
+
+def getServer():
+    #TODO get a server by id
+    return
+
+def startServer():
+    #TODO start a server
+    return
+
+def stopServer():
+    #TODO stop a server
+    return
+
+def getMachines():
+    #TODO get all machines
+    return
+
+def leastLoadedMachine():
+    #TODO get the machine with the least amount of servers
+    return
 
 
 
