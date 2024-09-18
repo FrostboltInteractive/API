@@ -5,10 +5,10 @@ import os
 #Endpoints
 def getServerList():
     servers = []
-    file_path = "Data/Servers.txt"
+    file_path = "Servers.txt"
     
     if not os.path.exists(file_path):
-        return {"error": "File not found: Data/Servers.txt"}
+        return {"error": "File not found: Servers.txt"}
     
     try:
         with open(file_path, 'r') as file:
