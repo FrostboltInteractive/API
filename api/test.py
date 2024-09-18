@@ -13,7 +13,7 @@ def getServerList():
         {"ip": "0.0.0.0", "port": 1, "status": "ok", "region": "usEast", "playercount": 0, "id": 1}
     ]
     #TODO loop to get all servers and set their data in the array
-	return servers
+    return servers
 
 
 app = Flask(__name__)
