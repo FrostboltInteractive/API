@@ -1,27 +1,30 @@
 from flask import Flask, Response, request
 import json
-
+import os
 
 #Endpoints
 def getServerList():
-    #0 = ip
-    #1 = port
-    #2 = status
-    #3 = region
-    #4 = playercount
-    #5 = id
     servers = []
-    with open("Data/Servers.txt", 'r') as file:
-        for line in file:
-            ip, port, status, region, playercount, id = line.strip().split(',')
-            servers.append({
-                "ip": ip,
-                "port": int(port),
-                "status": status,
-                "region": region,
-                "playercount": int(playercount),
-                "id": int(id)
-            })
+    file_path = "Data/Servers.txt"
+    
+    if not os.path.exists(file_path):
+        return {"error": "File not found: Data/Servers.txt"}
+    
+    try:
+        with open(file_path, 'r') as file:
+            for line in file:
+                ip, port, status, region, playercount, id = line.strip().split(',')
+                servers.append({
+                    "ip": ip,
+                    "port": int(port),
+                    "status": status,
+                    "region": region,
+                    "playercount": int(playercount),
+                    "id": int(id)
+                })
+    except FileNotFoundError:
+        return {"error": "File not found: Data/Servers.txt"}
+    
     return servers
 
 def addServer(data):
