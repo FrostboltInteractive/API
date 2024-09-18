@@ -1,6 +1,6 @@
 from flask import Flask, Response
 import json
-from Servers import getServerList  # Correct import
+from servers import getServerList
 
 
 app = Flask(__name__)
