@@ -1,6 +1,5 @@
 from flask import Flask, Response
 import json
-from serv import getServerList
 
 #Endpoints
 def getServerList():
@@ -19,7 +18,7 @@ def getServerList():
 def addServer():
 
 def removeServer():
-    
+
 
 
 app = Flask(__name__)
