@@ -31,7 +31,7 @@ def addServer(data):
     
     # Example logic to add the server to the list
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    file_path = os.path.join(current_dir, 'Servers.txt')
+    file_path = os.path.join(current_dir, '../tmp/Servers.txt')
     with open(file_path, 'a') as file:
         file.write(f"{data.ip},{data.port},{data.status},{data.region},{data.playercount},{data.id}\n")
     # Here you would typically append the new server to your data store
