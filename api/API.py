@@ -28,12 +28,10 @@ def getServerList():
     return servers
 
 def addServer(data):
-    
     # Example logic to add the server to the list
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    file_path = os.path.join(current_dir, '/tmp/Servers.txt')
+    file_path = '/tmp/Servers.txt'
     with open(file_path, 'a') as file:
-        file.write(f"{data.ip},{data.port},{data.status},{data.region},{data.playercount},{data.id}\n")
+        file.write(f"{data['ip']},{data['port']},{data['status']},{data['region']},{data['playercount']},{data['id']}\n")
     # Here you would typically append the new server to your data store
     # For this example, we'll just return the new server
     return {"message": "Server added", "data": data}
@@ -84,30 +82,11 @@ def home():
 @app.route('/getServerList')
 def handleGetServerList():
     res = getServerList()
-    #response = Response(json.dumps(res), mimetype='application/json')
-    #response.headers.add('Access-Control-Allow-Origin', '*')
-    #response.headers.add('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-    #response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
-    #return response
     return Response(json.dumps(res), mimetype='application/json')
 
 
 @app.route('/addServer', methods=['POST'])
 def handleAddServer():
-    ip = request.args.get('ip')
-    port = request.args.get('port')
-    status = request.args.get('status')
-    region = request.args.get('region')
-    playercount = request.args.get('playercount')
-    id = request.args.get('id')
-    
-    data = {
-        "ip": ip,
-        "port": port,
-        "status": status,
-        "region": region,
-        "playercount": playercount,
-        "id": id
-    }
+    data = request.get_json()
     res = addServer(data)
     return Response(json.dumps(res), mimetype='application/json')
