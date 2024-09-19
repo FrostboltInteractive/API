@@ -109,6 +109,6 @@ def handleGetServerList():
 
 @app.route('/addServer', methods=['POST'])
 def handleAddServer():
-    data = request.get_json()  # Get the JSON data from the POST request
+    data = request.args()  # Get the JSON data from the POST request
     res = addServer(data)
     return Response(json.dumps(res), mimetype='application/json')
