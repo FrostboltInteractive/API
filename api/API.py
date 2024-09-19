@@ -46,6 +46,7 @@ def removeServer(data):
     with open('/tmp/Servers.txt', 'w') as file:
         for j in servers:
             file.write(file.write(f"{servers[j]['ip']},{servers[j]['port']},{servers[j]['status']},{servers[j]['region']},{servers[j]['playercount']},{servers['id']}\n"))
+            file.write(file.write(f"{servers[j]['ip']},{servers[j]['port']},{servers[j]['status']},{servers[j]['region']},{servers[j]['playercount']},{servers[j]['id']}\n"))
     return "Server #" + id + " removed"
 
 def updateServer(data, newData):
@@ -111,7 +112,6 @@ def home():
 def handleGetServerList():
     res = getServerList()
     return Response(json.dumps(res), mimetype='application/json')
-
 
 @app.route('/addServer', methods=['POST'])
 def handleAddServer():
