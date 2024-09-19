@@ -28,30 +28,15 @@ def getServerList():
     return servers
 
 def addServer(data):
-    # Access the data from the POST request
-    ip = data.get('ip')
-    port = data.get('port')
-    status = data.get('status')
-    region = data.get('region')
-    playercount = data.get('playercount')
-    id = data.get('id')
     
     # Example logic to add the server to the list
-    new_server = {
-        "ip": ip,
-        "port": int(port),
-        "status": status,
-        "region": region,
-        "playercount": int(playercount),
-        "id": int(id)
-    }
     current_dir = os.path.dirname(os.path.abspath(__file__))
     file_path = os.path.join(current_dir, 'Servers.txt')
     with open(file_path, 'a') as file:
-        file.write(f"{ip},{port},{status},{region},{playercount},{id}\n")
+        file.write(f"{data.ip},{data.port},{data.status},{data.region},{data.playercount},{data.id}\n")
     # Here you would typically append the new server to your data store
     # For this example, we'll just return the new server
-    return {"message": "Server added", "data": new_server}
+    return {"message": "Server added", "data": data}
 
 def removeServer():
     #TODO remove a server from the list
