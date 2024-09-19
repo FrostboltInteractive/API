@@ -41,11 +41,11 @@ def removeServer(data):
     id = data['id']
     servers = getServerList()
     for i in servers:   
-        if(i.id == id):
+        if(i['id'] == id):
             servers.remove(i)
     with open('/tmp/Servers.txt', 'w') as file:
         for j in servers:
-            file.write(file.write(f"{servers[j].ip},{servers[j].port},{servers[j].status},{servers[j].region},{servers[j].playercount},{servers.id}\n")
+            file.write(file.write(f"{servers[j]['ip']},{servers[j]['port']},{servers[j]['status']},{servers[j]['region']},{servers[j]['playercount']},{servers['id']}\n")
 )
     return ""
 
