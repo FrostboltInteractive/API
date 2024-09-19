@@ -56,7 +56,7 @@ def updateServer(data, newData):
             servers[i] = newData
     with open('/tmp/Servers.txt', 'w') as file:
         for j in servers:
-            file.write(file.write(f"{servers[j]['ip']},{servers[j]['port']},{servers[j]['status']},{servers[j]['region']},{servers[j]['playercount']},{servers['id']}\n"))
+            file.write(file.write(f"{servers[j]['ip']},{servers[j]['port']},{servers[j]['status']},{servers[j]['region']},{servers[j]['playercount']},{servers[j]['id']}\n"))
     return ""
 
 def nextServerId():
