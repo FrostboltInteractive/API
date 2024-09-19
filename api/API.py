@@ -31,7 +31,7 @@ def addServer(data):
     # Example logic to add the server to the list
     file_path = '/tmp/Servers.txt'
     with open(file_path, 'a') as file:
-        file.write(f"{data['ip']},{data['port']},{data['status']},{data['region']},{data['playercount']},{data['id']}\n")
+        file.write(f"{data['ip']},{data['port']},{data['status']},{data['region']},{data['playercount']},{nextServerId()}\n")
     # Here you would typically append the new server to your data store
     # For this example, we'll just return the new server
     return {"message": "Server added", "data": data}
@@ -68,6 +68,9 @@ def nextServerId():
         if(i not in ids):
             return i
     return len(ids)
+
+def serverNum():
+    return len(getServerList())
 
 def getServer(id):
     #TODO get a server by id
