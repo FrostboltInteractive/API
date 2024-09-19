@@ -38,9 +38,9 @@ def addServer(data):
 
 def removeServer(data):
     #TODO remove a server from the list
-    id = data.id
+    id = data['id']
     servers = getServerList()
-    for i in servers: 
+    for i in servers:   
         if(i.id == id):
             servers.remove(i)
     with open('/tmp/Servers.txt', 'w') as file:
