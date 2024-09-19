@@ -36,15 +36,24 @@ def addServer(data):
     # For this example, we'll just return the new server
     return {"message": "Server added", "data": data}
 
-def removeServer():
+def removeServer(data):
     #TODO remove a server from the list
+    id = data.id
+    servers = getServerList()
+    for i in servers: 
+        if(i.id == id):
+            servers.remove(i)
+    with open('/tmp/Servers.txt', 'w') as file:
+        for j in servers:
+            file.write(file.write(f"{servers[j].ip},{servers[j].port},{servers[j].status},{servers[j].region},{servers[j].playercount},{servers.id}\n")
+)
     return ""
 
-def updateServer():
+def updateServer(id, newData):
     #TODO update the server data
     return ""
 
-def getServer():
+def getServer(id):
     #TODO get a server by id
     return ""
 
@@ -52,7 +61,7 @@ def startServer():
     #TODO start a server
     return ""
 
-def stopServer():
+def stopServer(id):
     #TODO stop a server
     return ""
 
@@ -68,7 +77,7 @@ def addMachine():
     #TODO add a machine
     return ""
 
-def removeMachine():
+def removeMachine(id):
     #TODO remove a machine
     return ""
 
@@ -89,4 +98,10 @@ def handleGetServerList():
 def handleAddServer():
     data = request.get_json()
     res = addServer(data)
+    return Response(json.dumps(res), mimetype='application/json')
+
+@app.route('/removeServer', methods=['POST'])
+def handleRemoveServer():
+    data = request.get_json()
+    res = removeServer(data)
     return Response(json.dumps(res), mimetype='application/json')
