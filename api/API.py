@@ -45,7 +45,7 @@ def removeServer(data):
             servers.remove(i)
     with open('/tmp/Servers.txt', 'w') as file:
         for j in range(len(servers)):
-            file.write(file.write(f"{servers[j]['ip']},{servers[j]['port']},{servers[j]['status']},{servers[j]['region']},{servers[j]['playercount']},{servers[j]['id']}\n"))
+            file.write(f"{servers[j]['ip']},{servers[j]['port']},{servers[j]['status']},{servers[j]['region']},{servers[j]['playercount']},{servers[j]['id']}\n")
     return "Server #" + str(id) + " removed"
 
 def updateServer(data, newData):
