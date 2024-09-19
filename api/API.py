@@ -109,6 +109,20 @@ def handleGetServerList():
 
 @app.route('/addServer', methods=['POST'])
 def handleAddServer():
-    data = request.args()  # Get the JSON data from the POST request
+    ip = request.args.get('ip')
+    port = request.args.get('port')
+    status = request.args.get('status')
+    region = request.args.get('region')
+    playercount = request.args.get('playercount')
+    id = request.args.get('id')
+    
+    data = {
+        "ip": ip,
+        "port": port,
+        "status": status,
+        "region": region,
+        "playercount": playercount,
+        "id": id
+    }
     res = addServer(data)
     return Response(json.dumps(res), mimetype='application/json')
