@@ -45,13 +45,29 @@ def removeServer(data):
             servers.remove(i)
     with open('/tmp/Servers.txt', 'w') as file:
         for j in servers:
-            file.write(file.write(f"{servers[j]['ip']},{servers[j]['port']},{servers[j]['status']},{servers[j]['region']},{servers[j]['playercount']},{servers['id']}\n")
-)
+            file.write(file.write(f"{servers[j]['ip']},{servers[j]['port']},{servers[j]['status']},{servers[j]['region']},{servers[j]['playercount']},{servers['id']}\n"))
+    return "Server #" + id + " removed"
+
+def updateServer(data, newData):
+    id = data['id']
+    servers = getServerList()
+    for i in servers:
+        if(i['id'] == id):
+            servers[i] = newData
+    with open('/tmp/Servers.txt', 'w') as file:
+        for j in servers:
+            file.write(file.write(f"{servers[j]['ip']},{servers[j]['port']},{servers[j]['status']},{servers[j]['region']},{servers[j]['playercount']},{servers['id']}\n"))
     return ""
 
-def updateServer(id, newData):
-    #TODO update the server data
-    return ""
+def nextServerId():
+    servers = getServerList()
+    ids = []
+    for i in servers:
+        ids.append(i['id'])
+    for i in range(0, len(ids)):
+        if(i not in ids):
+            return i
+    return len(ids)
 
 def getServer(id):
     #TODO get a server by id
