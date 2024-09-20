@@ -76,9 +76,18 @@ def getServer(id):
     #TODO get a server by id
     return ""
 
-def startServer():
+def startServer(machineID):
     #TODO start a server
-    return ""
+    least = leastLoadedMachine()
+    machineIP = "192.168.1.100"  # Replace with the actual IP address of the Java server
+    machinePort = 8080
+    machineURL = f"http://{machineIP}:{machinePort}/startServer"
+    try:
+        response = request.get(machineURL)
+        return response.text
+    except Exception as e:  
+        return str(e)
+    return "FAIL"
 
 def stopServer(id):
     #TODO stop a server
@@ -92,8 +101,28 @@ def leastLoadedMachine():
     #TODO get the machine with the least amount of servers
     return ""
 
-def addMachine():
+def addMachine(data):
+    #1: ip
+    #2: region
+    #3: serverCount
+    #4: status
+    #5: id
+    #6: serverIds (list) format = 1&2&3&4
     #TODO add a machine
+    serverIds = data['serverIds']
+    ids = ""
+    servers = getServerList()
+    for i in range(servers):
+        if(i['id'] in serverIds):
+            ids += str(i['id']) + "&"
+            ids.rstrip("&")
+    with open('/tmp/Servers.txt', 'w') as file:
+        file.write(f"{data['ip']},{data['region']},{data['serverCount']},{data['status']},{data['id']},{ids}\n")
+    return "Machine Added ID: " + str(data['id'])
+
+def getMachineIp(id):
+    #TODO get the ip of a machine
+
     return ""
 
 def removeMachine(id):
@@ -123,3 +152,16 @@ def handleRemoveServer():
     data = request.get_json()
     res = removeServer(data)
     return Response(json.dumps(res), mimetype='application/json')
+
+@app.route('/updateServer', methods=['POST'])
+def handleUpdateServer():
+    newData = request.get_json()
+    data = newData['id']
+    res = updateServer(data, newData)
+    return Response(json.dumps(res), mimetype='application/json')
+
+@app.route('/machineHeartbeat', methods=['POST'])
+def handleMachineHeartbeat():
+    data = request.get_json()
+    #TODO handle machine heartbeat
+    return ""
