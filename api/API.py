@@ -93,7 +93,7 @@ def stopServer(id):
     #TODO stop a server
     return ""
 
-def getMachines():
+def getMachineList():
     #TODO get all machines
     return ""
 
@@ -112,7 +112,7 @@ def addMachine(data):
     serverIds = data['serverIds']
     ids = ""
     servers = getServerList()
-    for i in range(servers):
+    for i in range(len(servers)):
         if(i['id'] in serverIds):
             ids += str(i['id']) + "&"
             ids.rstrip("&")
