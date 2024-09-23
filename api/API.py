@@ -113,7 +113,7 @@ def addMachine(data):
     ids = ""
     servers = getServerList()
     for i in range(len(servers)):
-        if(i['id'] in serverIds):
+        if(servers[i]['id'] in serverIds):
             ids += str(i['id']) + "&"
             ids.rstrip("&")
     with open('/tmp/Servers.txt', 'w') as file:
