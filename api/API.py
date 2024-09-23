@@ -110,15 +110,24 @@ def addMachine(data):
     #6: serverIds (list) format = 1&2&3&4
     #TODO add a machine
     serverIds = data['serverIds']
-    ids = ""
+    ids_list = []
     servers = getServerList()
-    for i in range(len(servers)):
-        if(servers[i].__getitem__("id") in serverIds):
-            ids += str(servers[i].__getitem__("id")) + "&"
-            ids.rstrip("&")
+    
+    # Loop through the servers and collect IDs
+    for server in servers:
+        if server.get('id') in serverIds:  # Access 'id' directly and use .get() for safe access
+            ids_list.append(str(server['id']))
+    
+    # Join the collected IDs with '&'
+    ids = "&".join(ids_list)
+    
+    # Write to file
     with open('/tmp/Servers.txt', 'w') as file:
         file.write(f"{data['ip']},{data['region']},{data['serverCount']},{data['status']},{data['id']},{ids}\n")
+    
+    # Return the response
     return "Machine Added ID: " + str(data['id'])
+    
 
 def getMachineIp(id):
     #TODO get the ip of a machine
