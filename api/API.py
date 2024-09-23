@@ -142,6 +142,10 @@ def removeMachine(id):
     #TODO remove a machine
     return ""
 
+def clearMachine():
+    with open('/tmp/Servers.txt', 'w') as file:
+        file.write("")
+    
 
 app = Flask(__name__)
 
