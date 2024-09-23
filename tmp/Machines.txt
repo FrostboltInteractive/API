@@ -1,1 +1,1 @@
-# this is the list of all of the server machines ips
+0.0.0.0,USEAST,1,OK,0,1
