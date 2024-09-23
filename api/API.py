@@ -113,10 +113,13 @@ def addMachine(data):
     ids_list = []
     servers = getServerList()
     
-    # Loop through the servers and collect IDs
+    # Loop through the servers and check the type
     for server in servers:
-        if server.get('id') in serverIds:  # Access 'id' directly and use .get() for safe access
-            ids_list.append(str(server['id']))
+        if isinstance(server, dict):  # Ensure server is a dictionary
+            if server.get('id') in serverIds:
+                ids_list.append(str(server['id']))
+        else:
+            print(f"Unexpected server type: {type(server)} - {server}")
     
     # Join the collected IDs with '&'
     ids = "&".join(ids_list)
@@ -127,7 +130,8 @@ def addMachine(data):
     
     # Return the response
     return "Machine Added ID: " + str(data['id'])
-    
+
+
 
 def getMachineIp(id):
     #TODO get the ip of a machine
