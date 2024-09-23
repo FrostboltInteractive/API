@@ -165,3 +165,9 @@ def handleMachineHeartbeat():
     data = request.get_json()
     #TODO handle machine heartbeat
     return ""
+
+@app.route('/addMachine', methods=['POST']) 
+def handleAddMachine():
+    data = request.get_json()
+    res = addMachine(data)
+    return Response(json.dumps(res), mimetype='application/json')
