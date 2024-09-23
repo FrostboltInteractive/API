@@ -113,8 +113,8 @@ def addMachine(data):
     ids = ""
     servers = getServerList()
     for i in servers:
-        if(i.__getitem__("id") in serverIds):
-            ids += str(i.__getitem__('id')) + "&"
+        if(i[0] in serverIds):
+            ids += str(i[0]) + "&"
             ids.rstrip("&")
     with open('/tmp/Servers.txt', 'w') as file:
         file.write(f"{data['ip']},{data['region']},{data['serverCount']},{data['status']},{data['id']},{ids}\n")
