@@ -23,7 +23,7 @@ def getServerList():
                     "id": int(id)
                 })
     except FileNotFoundError:
-        return {"error": "FUCK"}
+        return {"error": "Servers.txt not found"}
     
     return servers
 
@@ -112,7 +112,7 @@ def addMachine(data):
     serverIds = data['serverIds']
     ids = ""
     servers = getServerList()
-    for i in servers:
+    for i in range(servers):
         if(servers[i]['id'] in serverIds):
             ids += str(servers[i]['id']) + "&"
             ids.rstrip("&")
