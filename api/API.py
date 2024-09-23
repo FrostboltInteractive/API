@@ -102,7 +102,8 @@ def getMachineList():
     try:
         with open(file_path, 'r') as file:
             for line in file:
-                ip, region, serverCount, status, id = line.strip().split(','), serverIds = line.strip().split(',')
+                ip, region, serverCount, status, id, serverIds = line.strip().split(',')
+                serverIds = serverIds.split('&')
                 machines.append({
                     "ip": ip,
                     "region": region,
