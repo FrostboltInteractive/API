@@ -112,9 +112,11 @@ def addMachine(data):
     serverIds = data['serverIds']
     ids = ""
     servers = getServerList()
+    iter = 0
     for key, value in servers.items():
-        if(value['id'] in serverIds):
-            ids += str(value['id']) + "&"
+        iter+=1
+        if(key[value] in serverIds):
+            ids += str(key[value]) + "&"
             ids.rstrip("&")
     with open('/tmp/Servers.txt', 'w') as file:
         file.write(f"{data['ip']},{data['region']},{data['serverCount']},{data['status']},{data['id']},{ids}\n")
