@@ -131,7 +131,7 @@ def addMachine(data):
     #TODO add a machine
     serverIds = data['serverIds']
     ids_list = []
-    servers = getServerList()
+    servers = getMachineList()
     
     # Loop through the servers and check the type
     for server in servers:
@@ -145,13 +145,21 @@ def addMachine(data):
     ids = "&".join(ids_list)
     
     # Write to file
-    with open('/tmp/Servers.txt', 'w') as file:
-        file.write(f"{data['ip']},{data['region']},{data['serverCount']},{data['status']},{data['id']},{ids}\n")
+    with open('/tmp/Machines.txt', 'w') as file:
+        file.write(f"{data['ip']},{data['region']},{data['serverCount']},{data['status']},{getNextMachineId()},{ids}\n")
     
     # Return the response
     return "Machine Added ID: " + str(data['id'])
 
-
+def getNextMachineId():
+    machines = getMachineList()
+    ids = []
+    for i in machines:
+        ids.append(i['id'])
+    for i in range(0, len(ids)):
+        if(i not in ids):
+            return i
+    return len(ids)
 
 def getMachineIp(id):
     #TODO get the ip of a machine
@@ -212,4 +220,10 @@ def handleAddMachine():
 @app.route('/getMachineList', methods=['GET'])
 def handleGetMachineList():
     res = getMachineList()
+    return Response(json.dumps(res), mimetype='application/json')
+
+@app.route('getMachineIp', methods=['GET'])
+def handleGetMachineIp():
+    data = request.get_json()
+    res = getMachineIp(data)
     return Response(json.dumps(res), mimetype='application/json')
