@@ -7,7 +7,6 @@ def getServerList():
     servers = []
     # Get the absolute path of the current file
     current_dir = os.path.dirname(os.path.realpath(__file__))
-    
     # Construct the absolute path to the Servers.txt file
     file_path = os.path.join(current_dir, '/tmp/Servers.txt')
     try:
