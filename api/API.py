@@ -222,7 +222,7 @@ def handleGetMachineList():
     res = getMachineList()
     return Response(json.dumps(res), mimetype='application/json')
 
-@app.route('getMachineIp', methods=['GET'])
+@app.route('/getMachineIp', methods=['GET'])
 def handleGetMachineIp():
     data = request.get_json()
     res = getMachineIp(data)
