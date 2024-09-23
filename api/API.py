@@ -143,13 +143,13 @@ def addMachine(data):
     
     # Join the collected IDs with '&'
     ids = "&".join(ids_list)
-    
+    id = getNextMachineId()
     # Write to file
     with open('/tmp/Machines.txt', 'w') as file:
-        file.write(f"{data['ip']},{data['region']},{data['serverCount']},{data['status']},{getNextMachineId()},{ids}\n")
+        file.write(f"{data['ip']},{data['region']},{data['serverCount']},{data['status']},{id},{ids}\n")
     
     # Return the response
-    return "Machine Added ID: " + str(data['id'])
+    return "Machine Added ID: " + str(id)
 
 def getNextMachineId():
     machines = getMachineList()
