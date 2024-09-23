@@ -93,7 +93,7 @@ def stopServer(id):
     #TODO stop a server
     return ""
 
-def getMachineList():
+def getMachineLis():
     #TODO get all machines
     return ""
 
@@ -112,11 +112,9 @@ def addMachine(data):
     serverIds = data['serverIds']
     ids = ""
     servers = getServerList()
-    iter = 0
-    for key, value in servers.items():
-        iter+=1
-        if(value in serverIds):
-            ids += value + "&"
+    for i in servers:
+        if(servers[i]['id'] in serverIds):
+            ids += str(servers[i]['id']) + "&"
             ids.rstrip("&")
     with open('/tmp/Servers.txt', 'w') as file:
         file.write(f"{data['ip']},{data['region']},{data['serverCount']},{data['status']},{data['id']},{ids}\n")
