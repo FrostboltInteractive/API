@@ -112,7 +112,7 @@ def addMachine(data):
     serverIds = data['serverIds']
     ids = ""
     servers = getServerList()
-    for i in range(servers):
+    for i in range(len(servers)):
         if(servers[i]['id'] in serverIds):
             ids += str(servers[i]['id']) + "&"
             ids.rstrip("&")
