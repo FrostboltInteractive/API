@@ -93,9 +93,29 @@ def stopServer(id):
     #TODO stop a server
     return ""
 
-def getMachineLis():
-    #TODO get all machines
-    return ""
+def getMachineList():
+    machines= []
+    # Get the absolute path of the current file
+    current_dir = os.path.dirname(os.path.realpath(__file__))
+    
+    # Construct the absolute path to the Servers.txt file
+    file_path = os.path.join(current_dir, '/tmp/Machines.txt')
+    try:
+        with open(file_path, 'r') as file:
+            for line in file:
+                ip, region, serverCount, status, id = line.strip().split(','), serverIds = line.strip().split(',')
+                machines.append({
+                    "ip": ip,
+                    "region": region,
+                    "serverCount": int(serverCount),
+                    "status": status,
+                    "id": int(id),
+                    "serverIds": serverIds
+                })
+    except FileNotFoundError:
+        return {"error": "Servers.txt not found"}
+    
+    return machines
 
 def leastLoadedMachine():
     #TODO get the machine with the least amount of servers
@@ -187,4 +207,9 @@ def handleMachineHeartbeat():
 def handleAddMachine():
     data = request.get_json()
     res = addMachine(data)
+    return Response(json.dumps(res), mimetype='application/json')
+
+@app.route('/getMachineList', methods=['GET'])
+def handleGetMachineList():
+    res = getMachineList()
     return Response(json.dumps(res), mimetype='application/json')
