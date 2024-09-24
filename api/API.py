@@ -1,6 +1,8 @@
 from flask import Flask, Response, request
 import json
 import os
+from redis import Redis
+
 
 #Endpoints
 def getServerList():
@@ -176,12 +178,23 @@ def clearMachine():
     with open('/tmp/Servers.txt', 'w') as file:
         file.write("")
     
+def dbStoreTest():
+
+    # Connect to Vercel KV (Redis)
+    redis = Redis(host='your-redis-host', port=6379, password='your-password')
+
+    # Store a couple of lines of text
+    redis.set('myText', 'Line 1\nLine 2\nLine 3')
+
+    # Retrieve text
+    stored_text = redis.get('myText')
+
 
 app = Flask(__name__)
 
-@app.route('/')
-def home():
-    return 'Hello, World!'
+@app.route('/test')
+def test():
+    dbStoreTest()
 
 @app.route('/getServerList')
 def handleGetServerList():
