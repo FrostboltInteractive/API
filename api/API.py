@@ -4,6 +4,10 @@ import os
 from redis import Redis
 
 
+redis_url = os.getenv('REDIS_URL')
+
+# Create a Redis client
+redis_client = Redis.StrictRedis.from_url(redis_url)
 #Endpoints
 def getServerList():
     servers = []
@@ -181,7 +185,7 @@ def clearMachine():
 def dbStoreTest():
 
     # Connect to Vercel KV (Redis)
-    redis = Redis(host='redis-12332.c14.us-east-1-2.ec2.redns.redis-cloud.com', port=12332, password='vinnie1259!!')
+    redis = Redis(host='redis-12332.c14.us-east-1-2.ec2.redns.redis-cloud.com', port=12332, password='FD0VclbftalwLruv8v4Wis96UURBffOk')
 
     # Store a couple of lines of text
     redis.set('myText', 'Line 1\nLine 2\nLine 3')
@@ -242,3 +246,4 @@ def handleGetMachineIp():
     data = request.get_json()
     res = getMachineIp(data)
     return Response(json.dumps(res), mimetype='application/json')
+
