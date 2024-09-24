@@ -11,7 +11,8 @@ def getServerList():
     servers = []
     # Get the absolute path of the current file
     dat = dataGet("Servers")
-    for line in dat:
+    arr = dat.split('\n')
+    for line in arr:
         ip, port, status, region, playerCount, shipCount, serverID, machineID = line.strip().split(',')
         servers.append({
             "ip": ip,
