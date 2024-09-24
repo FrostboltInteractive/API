@@ -7,8 +7,7 @@ from redis import Redis
 redis_url = os.getenv('REDIS_URL')
 
 # Create a Redis client
-redis_client = Redis.StrictRedis.from_url(redis_url)
-#Endpoints
+redis_client = redis.Redis.from_url(redis_url)#Endpoints
 def getServerList():
     servers = []
     # Get the absolute path of the current file
