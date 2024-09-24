@@ -182,25 +182,26 @@ def clearMachine():
     
 def dbStoreTest():
     try:
-        # Create Redis client
-        redis_client = redis.Redis(
-            host='redis-12332.c14.us-east-1-2.ec2.redns.redis-cloud.com', 
-            port=12332, 
-            password='FD0VclbftalwLruv8v4Wis96UURBffOk'
-        )
-        
         # Store data in Redis
         redis_client.set('myText', 'Line 1\nLine 2\nLine 3')
 
         # Optionally, retrieve the data to confirm
-        stored_text = redis_client.get('myText').decode('utf-8')  # decode to convert bytes to string
+        stored_text = redis_client.get('myText')
+        if stored_text is not None:
+            stored_text = stored_text.decode('utf-8')  # decode to convert bytes to string
+        else:
+            stored_text = "No data found"
 
-        # Return a valid response
-        return jsonify({"message": "Data stored successfully", "stored_text": stored_text})
-
+        # Return a valid JSON response
+        return jsonify({
+            "message": "Data stored successfully",
+            "stored_text": stored_text
+        })
     except Exception as e:
-        return jsonify({"error": str(e)}), 500  # Return an error response if something goes wrong
-
+        # Return an error in case of exception
+        return jsonify({
+            "error": str(e)
+        })
 
 app = Flask(__name__)
 
