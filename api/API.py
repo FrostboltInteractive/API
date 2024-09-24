@@ -12,14 +12,16 @@ def getServerList():
     try:
         with open(file_path, 'r') as file:
             for line in file:
-                ip, port, status, region, playercount, id = line.strip().split(',')
+                ip, port, status, region, playerCount, shipCount, serverID, machineID = line.strip().split(',')
                 servers.append({
                     "ip": ip,
                     "port": int(port),
                     "status": status,
                     "region": region,
-                    "playercount": int(playercount),
-                    "id": int(id)
+                    "playerCount": int(playerCount),
+                    "shipCount": int(shipCount),
+                    "serverID": int(serverID),
+                    "machineID": int(machineID)
                 })
     except FileNotFoundError:
         return {"error": "Servers.txt not found"}
