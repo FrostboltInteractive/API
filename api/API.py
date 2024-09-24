@@ -180,35 +180,19 @@ def clearMachine():
     with open('/tmp/Servers.txt', 'w') as file:
         file.write("")
     
-def dbStoreTest():
-    try:
-        # Store data in Redis
-        redis_client.set('myText', 'Line 1\nLine 2\nLine 3')
+def dbStoreTest(key, val): #takes in json and stores it in redis
+    redis_client.set(key, val)
 
-        # Optionally, retrieve the data to confirm
-        stored_text = redis_client.get('myText')
-        if stored_text is not None:
-            stored_text = stored_text.decode('utf-8')  # decode to convert bytes to string
-        else:
-            stored_text = "No data found"
+def dbGetTest(key): #takes in key and returns the value from redis
+    return redis_client.get(key)
 
-        # Return a valid JSON response
-        return jsonify({
-            "message": "Data stored successfully",
-            "stored_text": stored_text
-        })
-    except Exception as e:
-        # Return an error in case of exception
-        return jsonify({
-            "error": str(e)
-        })
 
 app = Flask(__name__)
 
 @app.route('/test')
 def test():
-    dbStoreTest()
-    return "Test"
+    dbStoreTest("servers", "{\"ip\": \"127.0.0.1\", \"port\": \"5500\", \"status\": \"running\", \"region\": \"NA\", \"playerCount\": \"10\", \"shipCount\": \"5\", \"serverID\": \"0\", \"machineID\": \"0\"}")
+    return dbGetTest("servers")
 
 @app.route('/getServerList')
 def handleGetServerList():
