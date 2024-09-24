@@ -181,7 +181,8 @@ def clearMachine():
         file.write("")
     
 def dbStoreTest(key, val): #takes in json and stores it in redis
-    redis_client.set(key, val)
+    json_val = json.dumps(val)
+    redis_client.set(key, json_val)
 
 def dbGetTest(key): #takes in key and returns the value from redis
     return redis_client.get(key)
