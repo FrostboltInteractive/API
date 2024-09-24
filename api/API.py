@@ -31,6 +31,8 @@ def getServerList():
 def addServer(data):
     # Example logic to add the server to the list
     serv = dataGet("Servers")
+    if(serv is None):
+        serv = ""
     s = f"{data['ip']},{data['port']},{data['status']},{data['region']},{data['playerCount']},{data['shipCount']},{nextServerId()},{data['machineID']}\n"
     dataStore("Servers", serv + s)
     # Here you would typically append the new server to your data store
