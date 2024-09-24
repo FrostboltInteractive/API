@@ -192,7 +192,7 @@ app = Flask(__name__)
 
 @app.route('/test')
 def test():
-    dbStoreTest("servers", "{ip: 127.0.0.1, port: 5500, status: running, region: NA, playerCount: 10, shipCount: 5, serverID: 0, machineID: 0}")
+    dbStoreTest("servers", "127.0.0.1,5500,running,USEAST,10,5,0,0")
     return dbGetTest("servers")
 
 @app.route('/getServerList')
