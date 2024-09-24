@@ -1,8 +1,7 @@
 from flask import Flask, Response, request
 import json
 import os
-from redis import Redis
-
+import redis
 
 redis_url = os.getenv('REDIS_URL')
 
