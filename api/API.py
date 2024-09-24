@@ -168,7 +168,10 @@ def dataStore(key, val): #takes in json and stores it in redis
     redis_client.set(key, val)
 
 def dataGet(key): #takes in key and returns the value from redis
-    return redis_client.get(key)
+    val = redis_client.get(key)
+    if val is not None:
+        return val.decode('utf-8')  # Decode bytes to string
+    return None
 
 
 app = Flask(__name__)
