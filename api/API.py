@@ -10,33 +10,26 @@ redis_client = redis.Redis.from_url(redis_url)#Endpoints
 def getServerList():
     servers = []
     # Get the absolute path of the current file
-    current_dir = os.path.dirname(os.path.realpath(__file__))
-    # Construct the absolute path to the Servers.txt file
-    file_path = os.path.join(current_dir, 'tmp/Servers.txt')
-    try:
-        with open(file_path, 'r') as file:
-            for line in file:
-                ip, port, status, region, playerCount, shipCount, serverID, machineID = line.strip().split(',')
-                servers.append({
-                    "ip": ip,
-                    "port": int(port),
-                    "status": status,
-                    "region": region,
-                    "playerCount": int(playerCount),
-                    "shipCount": int(shipCount),
-                    "serverID": int(serverID),
-                    "machineID": int(machineID)
-                })
-    except FileNotFoundError:
-        return {"error": "Servers.txt not found"}
-    
+    dat = dataGet("Servers")
+    for line in dat:
+        ip, port, status, region, playerCount, shipCount, serverID, machineID = line.strip().split(',')
+        servers.append({
+            "ip": ip,
+            "port": int(port),
+            "status": status,
+            "region": region,
+            "playerCount": int(playerCount),
+            "shipCount": int(shipCount),
+            "serverID": int(serverID),
+            "machineID": int(machineID)
+        })
     return servers
 
 def addServer(data):
     # Example logic to add the server to the list
-    file_path = '/tmp/Servers.txt'
-    with open(file_path, 'a') as file:
-        file.write(f"{data['ip']},{data['port']},{data['status']},{data['region']},{data['playerCount']},{data['shipCount']},{nextServerId()},{data['machineID']}\n")
+    serv = dataGet("Servers")
+    s = f"{data['ip']},{data['port']},{data['status']},{data['region']},{data['playerCount']},{data['shipCount']},{nextServerId()},{data['machineID']}\n"
+    dataStore("Servers", serv + s)
     # Here you would typically append the new server to your data store
     # For this example, we'll just return the new server
     return {"message": "Server added", "data": data}
