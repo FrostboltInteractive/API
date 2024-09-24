@@ -1,4 +1,4 @@
-from flask import Flask, Response, request
+from flask import Flask, Response, request, jsonify 
 import json
 import os
 import redis
@@ -181,15 +181,25 @@ def clearMachine():
         file.write("")
     
 def dbStoreTest():
+    try:
+        # Create Redis client
+        redis_client = redis.Redis(
+            host='redis-12332.c14.us-east-1-2.ec2.redns.redis-cloud.com', 
+            port=12332, 
+            password='FD0VclbftalwLruv8v4Wis96UURBffOk'
+        )
+        
+        # Store data in Redis
+        redis_client.set('myText', 'Line 1\nLine 2\nLine 3')
 
-    redis_client = redis.Redis(
-        host='redis-12332.c14.us-east-1-2.ec2.redns.redis-cloud.com', 
-        port=12332, 
-        password='FD0VclbftalwLruv8v4Wis96UURBffOk'
-    )
-    
-    # Store data in Redis
-    redis_client.set('myText', 'Line 1\nLine 2\nLine 3')
+        # Optionally, retrieve the data to confirm
+        stored_text = redis_client.get('myText').decode('utf-8')  # decode to convert bytes to string
+
+        # Return a valid response
+        return jsonify({"message": "Data stored successfully", "stored_text": stored_text})
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500  # Return an error response if something goes wrong
 
 
 app = Flask(__name__)
