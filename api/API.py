@@ -32,7 +32,7 @@ def addServer(data):
     # Example logic to add the server to the list
     file_path = '/tmp/Servers.txt'
     with open(file_path, 'a') as file:
-        file.write(f"{data['ip']},{data['port']},{data['status']},{data['region']},{data['playercount']},{nextServerId()}\n")
+        file.write(f"{data['ip']},{data['port']},{data['status']},{data['region']},{data['playerCount']},{data['shipCount']},{nextServerId()},{data['machineID']}\n")
     # Here you would typically append the new server to your data store
     # For this example, we'll just return the new server
     return {"message": "Server added", "data": data}
@@ -46,7 +46,7 @@ def removeServer(data):
             servers.remove(i)
     with open('/tmp/Servers.txt', 'w') as file:
         for j in range(len(servers)):
-            file.write(f"{servers[j]['ip']},{servers[j]['port']},{servers[j]['status']},{servers[j]['region']},{servers[j]['playercount']},{servers[j]['id']}\n")
+            file.write(f"{servers[j]['ip']},{servers[j]['port']},{servers[j]['status']},{servers[j]['region']},{servers[j]['playerCount']},{servers[j]['id']}\n")
     return "Server #" + str(id) + " removed"
 
 def updateServer(data, newData):
