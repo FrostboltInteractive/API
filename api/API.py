@@ -100,27 +100,18 @@ def stopServer(id):
 
 def getMachineList():
     machines= []
-    # Get the absolute path of the current file
-    current_dir = os.path.dirname(os.path.realpath(__file__))
-    
-    # Construct the absolute path to the Servers.txt file
-    file_path = os.path.join(current_dir, 'tmp/Machines.txt')
-    try:
-        with open(file_path, 'r') as file:
-            for line in file:
-                ip, region, serverCount, status, id, serverIds = line.strip().split(',')
-                serverIds = serverIds.split('&')
-                machines.append({
-                    "ip": ip,
-                    "region": region,
-                    "serverCount": int(serverCount),
-                    "status": status,
-                    "id": int(id),
-                    "serverIds": serverIds
-                })
-    except FileNotFoundError:
-        return {"error": "Machines.txt not found"}
-    
+    data = dataGet("Machines")
+    for line in data:
+        ip, region, serverCount, status, id, serverIds = line.strip().split(',')
+        serverIds = serverIds.split('&')
+        machines.append({
+            "ip": ip,
+            "region": region,
+            "serverCount": int(serverCount),
+            "status": status,
+            "id": int(id),
+            "serverIds": serverIds
+        })
     return machines
 
 def leastLoadedMachine():
