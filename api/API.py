@@ -182,14 +182,14 @@ def clearMachine():
     
 def dbStoreTest():
 
-    # Connect to Vercel KV (Redis)
-    redis = Redis(host='redis-12332.c14.us-east-1-2.ec2.redns.redis-cloud.com', port=12332, password='FD0VclbftalwLruv8v4Wis96UURBffOk')
-
-    # Store a couple of lines of text
-    redis.set('myText', 'Line 1\nLine 2\nLine 3')
-
-    # Retrieve text
-    stored_text = redis.get('myText')
+    redis_client = redis.Redis(
+        host='redis-12332.c14.us-east-1-2.ec2.redns.redis-cloud.com', 
+        port=12332, 
+        password='FD0VclbftalwLruv8v4Wis96UURBffOk'
+    )
+    
+    # Store data in Redis
+    redis_client.set('myText', 'Line 1\nLine 2\nLine 3')
 
 
 app = Flask(__name__)
