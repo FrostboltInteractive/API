@@ -181,7 +181,7 @@ def clearMachine():
 def dbStoreTest():
 
     # Connect to Vercel KV (Redis)
-    redis = Redis(host='your-redis-host', port=6379, password='your-password')
+    redis = Redis(host='redis-12332.c14.us-east-1-2.ec2.redns.redis-cloud.com', port=12332, password='vinnie1259!')
 
     # Store a couple of lines of text
     redis.set('myText', 'Line 1\nLine 2\nLine 3')
