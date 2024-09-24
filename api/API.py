@@ -151,8 +151,8 @@ def addMachine(data):
     ids = "&".join(ids_list)
     id = getNextMachineId()
     # Write to file
-    with open('/tmp/Machines.txt', 'w') as file:
-        file.write(f"{data['ip']},{data['region']},{data['serverCount']},{data['status']},{id},{ids}\n")
+    s = f"{data['ip']},{data['region']},{data['serverCount']},{data['status']},{id},{ids}\n"
+    dataStore("Machines", s)
     
     # Return the response
     return "Machine Added ID: " + str(id)
@@ -180,11 +180,10 @@ def clearMachine():
     with open('/tmp/Servers.txt', 'w') as file:
         file.write("")
     
-def dbStoreTest(key, val): #takes in json and stores it in redis
-    json_val = json.dumps(val)
-    redis_client.set(key, json_val)
+def dataStore(key, val): #takes in json and stores it in redis
+    redis_client.set(key, val)
 
-def dbGetTest(key): #takes in key and returns the value from redis
+def dataGet(key): #takes in key and returns the value from redis
     return redis_client.get(key)
 
 
@@ -192,8 +191,8 @@ app = Flask(__name__)
 
 @app.route('/test')
 def test():
-    dbStoreTest("servers", "127.0.0.1,5500,running,USEAST,10,5,0,0")
-    return dbGetTest("servers")
+    dataStore("servers", "127.0.0.1,5500,running,USEAST,10,5,0,0")
+    return dataGet("servers")
 
 @app.route('/getServerList')
 def handleGetServerList():
