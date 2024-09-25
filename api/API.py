@@ -15,11 +15,12 @@ def getServerList():
     if dat is None:
         return []
     arr = dat.split('\n')
-    print(arr[0] + "Test")
+
     for line in arr:
         line = str(line)
         print(line)
         arr = line.split('?')
+        print(arr[0] + "Test")
         print(type(arr))
         ip, port, status, region, playerCount, shipCount, serverID, machineID = arr
         servers.append({
