@@ -15,6 +15,7 @@ def getServerList():
         return []
     arr = dat.split('\n')
     for line in arr:
+        line = str(line)
         print(line)
         arr = line.split(',')
         print(type(arr))
