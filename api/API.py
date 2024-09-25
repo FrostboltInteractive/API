@@ -11,6 +11,7 @@ def getServerList():
     servers = []
     # Get the absolute path of the current file
     dat = dataGet("Servers")
+    print(dat + "Serv")
     if dat is None:
         return []
     arr = dat.split('\n')
@@ -35,7 +36,7 @@ def getServerList():
 def addServer(data):
     # Example logic to add the server to the list
     serv = dataGet("Servers")
-    print(serv + "Serv")
+
     if(serv is None):
         serv = ""
     s = f"{data['ip']},{data['port']},{data['status']},{data['region']},{data['playerCount']},{data['shipCount']},{nextServerId()},{data['machineID']}\n"
