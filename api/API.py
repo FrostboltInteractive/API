@@ -78,7 +78,7 @@ def nextServerId():
     servers = getServerList()
     ids = []
     for i in servers:
-        ids.append(i['id'])
+        ids.append(i['serverID'])
     for i in range(0, len(ids)):
         if(i not in ids):
             return i
