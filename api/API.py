@@ -16,7 +16,7 @@ def getServerList():
     arr = dat.split('\n')
     for line in arr:
         line = str(line)
-        arr = line.split('?')
+        arr = line.split(',')
         if(len(arr) < 8):
             continue
         else:
