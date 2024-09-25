@@ -113,16 +113,26 @@ def getMachineList():
     machines= []
     data = dataGet("Machines")
     for line in data:
-        ip, region, serverCount, status, id, serverIds = line.strip().split(',')
-        serverIds = serverIds.split('&')
-        machines.append({
-            "ip": ip,
-            "region": region,
-            "serverCount": int(serverCount),
-            "status": status,
-            "id": int(id),
-            "serverIds": serverIds
-        })
+        arr = line.split(',')
+        if(len(arr) < 6):
+            continue
+        else:
+            strs = line.strip().split(',')
+            ip = strs[0]
+            region = strs[1]
+            serverCount = strs[2]
+            status = strs[3]
+            id = strs[4]
+            serverIds = strs[5]
+            serverIds = serverIds.split('&')
+            machines.append({
+                "ip": ip,
+                "region": region,
+                "serverCount": int(serverCount),
+                "status": status,
+                "id": int(id),
+                "serverIds": serverIds
+            })
     return machines
 
 def leastLoadedMachine():
