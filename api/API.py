@@ -14,30 +14,32 @@ def getServerList():
     if dat is None:
         return []
     arr = dat.split('\n')
-
     for line in arr:
         line = str(line)
         arr = line.split('?')
-        print(len(arr))
-        ip = arr[0]
-        port = arr[1]
-        status = arr[2]
-        region = arr[3]
-        playerCount = arr[4]
-        shipCount = arr[5]
-        serverID = arr[6]
-        machineID = arr[7]
-        servers.append({
-            "ip": ip,
-            "port": int(port),
-            "status": status,
-            "region": region,
-            "playerCount": int(playerCount),
-            "shipCount": int(shipCount),
-            "serverID": int(serverID),
-            "machineID": int(machineID)
-        })
+        if(len(arr) < 8):
+            continue
+        else:
+            ip = arr[0]
+            port = arr[1]
+            status = arr[2]
+            region = arr[3]
+            playerCount = arr[4]
+            shipCount = arr[5]
+            serverID = arr[6]
+            machineID = arr[7]
+            servers.append({
+                "ip": ip,
+                "port": int(port),
+                "status": status,
+                "region": region,
+                "playerCount": int(playerCount),
+                "shipCount": int(shipCount),
+                "serverID": int(serverID),
+                "machineID": int(machineID)
+            })
     return servers
+
 
 def addServer(data):
     # Example logic to add the server to the list
