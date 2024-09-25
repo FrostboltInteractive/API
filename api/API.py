@@ -149,7 +149,7 @@ def addMachine(data):
     #TODO add a machine
     serverIds = data['serverIds']
     ids_list = []
-    servers = getMachineList()
+    servers = getServerList()
     
     # Loop through the servers and check the type
     for server in servers:
@@ -161,6 +161,7 @@ def addMachine(data):
     
     # Join the collected IDs with '&'
     ids = "&".join(ids_list)
+    print(ids)
     id = getNextMachineId()
     # Write to file
     s = f"{data['ip']},{data['region']},{data['serverCount']},{data['status']},{id},{ids}\n"
