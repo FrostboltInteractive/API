@@ -17,8 +17,8 @@ def getServerList():
     for line in arr:
         print(line)
         arr = line.split(',')
-        ip, port, status, region, playerCount, shipCount, serverID, machineID
-        
+        print(type(arr))
+        ip, port, status, region, playerCount, shipCount, serverID, machineID = arr
         servers.append({
             "ip": ip,
             "port": int(port),
