@@ -15,6 +15,7 @@ def getServerList():
     if dat is None:
         return []
     arr = dat.split('\n')
+    print(arr[0] + "Test")
     for line in arr:
         line = str(line)
         print(line)
