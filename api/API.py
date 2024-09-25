@@ -144,8 +144,8 @@ def addMachine(data):
     # Loop through the servers and check the type
     for server in servers:
         if isinstance(server, dict):  # Ensure server is a dictionary
-            if server.get('id') in serverIds:
-                ids_list.append(str(server['id']))
+            if server.get('serverID') in serverIds:
+                ids_list.append(str(server['serverID']))
         else:
             print(f"Unexpected server type: {type(server)} - {server}")
     
@@ -163,7 +163,7 @@ def getNextMachineId():
     machines = getMachineList()
     ids = []
     for i in machines:
-        ids.append(i['id'])
+        ids.append(i['machineID'])
     for i in range(0, len(ids)):
         if(i not in ids):
             return i
