@@ -46,7 +46,7 @@ def addServer(data):
     serv = dataGet("Servers")
     if(serv is None):
         serv = ""
-    s = f"\n{data['ip']},{data['port']},{data['status']},{data['region']},{data['playerCount']},{data['shipCount']},{nextServerId()},{data['machineID']}\n"
+    s = f"{data['ip']},{data['port']},{data['status']},{data['region']},{data['playerCount']},{data['shipCount']},{nextServerId()},{data['machineID']}\n"
     dataStore("Servers", serv + s)
     # Here you would typically append the new server to your data store
     # For this example, we'll just return the new server
