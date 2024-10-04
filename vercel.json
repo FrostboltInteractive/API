@@ -1,12 +1,4 @@
 {
-  "functions": {
-    "api/control/*": {
-      "runtime": "python@3.9"
-    },
-    "api/proxy/*": {
-      "runtime": "nodejs@18"
-    }
-  },
   "rewrites": [
     { "source": "/control/(.*)", "destination": "/api/control/API.py" },
     { "source": "/proxy/(.*)", "destination": "/api/proxy/server.js" }
