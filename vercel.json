@@ -3,12 +3,12 @@
     "api/control/*": {
       "runtime": "python3.9"
     },
-    "api/proxy/*":{
-      "runtime": "nodejs12.x"
+    "api/proxy/*": {
+      "runtime": "nodejs18.x"
     }
   },
   "rewrites": [
     { "source": "/control/(.*)", "destination": "/api/control/API.py" },
-    { "source": "/proxy/(.*)", "destination": "/api/proxy/gateway.js" }
+    { "source": "/proxy/(.*)", "destination": "/api/proxy/server.js" }
   ]
 }
