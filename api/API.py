@@ -263,3 +263,4 @@ def handleMTest():
     data = request.get_json()
     print("test")
     requests.get("https://" + "10.46.105.148" + ":" + "5000" + "/" + "test")
+    return "successapi"
