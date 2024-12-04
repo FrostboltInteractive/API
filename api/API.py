@@ -115,6 +115,7 @@ def getMachineList():
     data = dataGet("Machines")
     if(data is None):
         return ["error"]
+    print(type(data))
     for line in data:
         print(line)
         arr = line.split(',')
