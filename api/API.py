@@ -113,6 +113,8 @@ def stopServer(id):
 def getMachineList():
     machines= []
     data = dataGet("Machines")
+    if(data is None):
+        return []
     for line in data:
         arr = line.split(',')
         if(len(arr) < 6):
@@ -175,6 +177,8 @@ def addMachine(data):
 
 def getNextMachineId():
     machines = getMachineList()
+    if(machines == None):
+        return 0
     ids = []
     for i in machines:
         ids.append(i['machineID'])
