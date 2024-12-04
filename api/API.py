@@ -117,7 +117,7 @@ def getMachineList():
         return ["error"]
 
     for line in machines:
-        print(line)
+        print(type(line))
         arr = line.split(',')
         if(len(arr) < 7):
             continue
