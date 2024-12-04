@@ -262,4 +262,4 @@ def handleGetMachineIp():
 def handleMTest():
     data = request.get_json()
     print("test")
-    requests.get(data['ip'] + ":" + data['port'] + "/" + "test")
+    requests.get("https://" + data['ip'] + ":" + data['port'] + "/" + "test")
