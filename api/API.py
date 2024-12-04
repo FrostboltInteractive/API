@@ -113,9 +113,10 @@ def stopServer(id):
 def getMachineList():
     machines= []
     data = dataGet("Machines")
+    print(type(data))
     if(data is None):
         return ["error"]
-    print(type(data))
+
     for line in data:
         print(line)
         arr = line.split(',')
