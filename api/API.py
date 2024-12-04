@@ -261,4 +261,5 @@ def handleGetMachineIp():
 @app.route('/mtest', methods=['POST'])
 def handleMTest():
     data = request.get_json()
-    requests.get(data['ip'] + ":" + data['port'] + "/" + "test")
+    print("test")
+    #requests.get(data['ip'] + ":" + data['port'] + "/" + "test")
