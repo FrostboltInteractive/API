@@ -141,11 +141,12 @@ def leastLoadedMachine():
 
 def addMachine(data):
     #1: ip
-    #2: region
-    #3: serverCount
-    #4: status
-    #5: id
-    #6: serverIds (list) format = 1&2&3&4
+    #2: port
+    #3: region
+    #4: serverCount
+    #5: status
+    #6: id
+    #7: serverIds (list) format = 1&2&3&4
     #TODO add a machine
     serverIds = data['serverIds']
     ids_list = []
@@ -164,7 +165,7 @@ def addMachine(data):
     print(ids)
     id = getNextMachineId()
     # Write to file
-    s = f"{data['ip']},{data['region']},{data['serverCount']},{data['status']},{id},{ids}\n"
+    s = f"{data['ip']},{data['port']},{data['region']},{data['serverCount']},{data['status']},{id},{ids}\n"
     dataStore("Machines", s)
     
     # Return the response
@@ -207,8 +208,7 @@ app = Flask(__name__)
 
 @app.route('/test')
 def test():
-    dataStore("servers", "127.0.0.1,5500,running,USEAST,10,5,0,0")
-    return dataGet("servers")
+    return "Hello, World!"
 
 @app.route('/getServerList')
 def handleGetServerList():
