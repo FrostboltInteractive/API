@@ -2,6 +2,7 @@ from flask import Flask, Response, request, jsonify
 import json
 import os
 import redis
+import requests
 
 redis_url = os.getenv('REDIS_URL')
 
