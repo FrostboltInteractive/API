@@ -116,6 +116,7 @@ def getMachineList():
     if(data is None):
         return ["error"]
     for line in data:
+        print(line)
         arr = line.split(',')
         if(len(arr) < 7):
             continue
