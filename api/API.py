@@ -117,19 +117,21 @@ def getMachineList():
         return []
     for line in data:
         arr = line.split(',')
-        if(len(arr) < 6):
+        if(len(arr) < 7):
             continue
         else:
             strs = line.strip().split(',')
             ip = strs[0]
-            region = strs[1]
-            serverCount = strs[2]
-            status = strs[3]
-            id = strs[4]
-            serverIds = strs[5]
+            port = strs[1]
+            region = strs[2]
+            serverCount = strs[3]
+            status = strs[4]
+            id = strs[5]
+            serverIds = strs[6]
             serverIds = serverIds.split('&')
             machines.append({
                 "ip": ip,
+                "port": port,
                 "region": region,
                 "serverCount": int(serverCount),
                 "status": status,
