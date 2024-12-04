@@ -152,14 +152,15 @@ def addMachine(data):
     serverIds = data['serverIds']
     ids_list = []
     servers = getServerList()
-    
-    # Loop through the servers and check the type
-    for server in servers:
-        if isinstance(server, dict):  # Ensure server is a dictionary
-            if server.get('serverID') in serverIds:
-                ids_list.append(str(server['serverID']))
-        else:
-            print(f"Unexpected server type: {type(server)} - {server}")
+    if(servers != None):
+        # Loop through the servers and check the type
+        for server in servers:
+            if isinstance(server, dict):  # Ensure server is a dictionary
+                if server.get('serverID') in serverIds:
+                    ids_list.append(str(server['serverID']))
+            else:
+                print(f"Unexpected server type: {type(server)} - {server}")
+
     
     # Join the collected IDs with '&'
     ids = "&".join(ids_list)
