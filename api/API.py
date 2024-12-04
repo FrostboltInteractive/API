@@ -113,14 +113,14 @@ def stopServer(id):
 def getMachineList():
     machines= []
     data = dataGet("Machines")
-    print(data)
     if(data is None):
         return ["error"]
     for line in data:
         arr = line.split(',')
         if(len(arr) < 7):
             continue
-        else:
+        else:   
+            print("Test")
             strs = line.strip().split(',')
             ip = strs[0]
             port = strs[1]
