@@ -209,6 +209,7 @@ def dataStore(key, val): #takes in json and stores it in redis
 def dataGet(key): #takes in key and returns the value from redis
     val = redis_client.get(key)
     if val is not None:
+        print(val)
         return val.decode('utf-8')  # Decode bytes to string
     return None
 
