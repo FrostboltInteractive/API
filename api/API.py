@@ -2,6 +2,7 @@ from flask import Flask, Response, request, jsonify
 import json
 import os
 import redis
+import requests
 
 redis_url = os.getenv('REDIS_URL')
 
@@ -257,3 +258,7 @@ def handleGetMachineIp():
     res = getMachineIp(data)
     return Response(json.dumps(res), mimetype='application/json')
 
+@app.route('/mtest', methods=['POST'])
+def handleMTest():
+    data = request.get_json()
+    requests.get(data['ip'] + ":" + data['port'] + "/" + "test")
