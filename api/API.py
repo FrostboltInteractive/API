@@ -177,8 +177,9 @@ def addMachine(data):
     print(ids)
     id = getNextMachineId()
     # Write to file
+    olddata = dataGet("Machines")
     s = f"{data['ip']},{data['port']},{data['region']},{data['serverCount']},{data['status']},{id},{ids}\n"
-    dataStore("Machines", s)
+    dataStore("Machines", olddata + s)
     
     # Return the response
     return "Machine Added ID: " + str(id)
