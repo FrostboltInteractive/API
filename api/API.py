@@ -196,7 +196,7 @@ def getNextMachineId():
             return i
     return len(ids)
 
-def wipeMachineList(id):
+def wipeMachineList():
     dataStore("Machines", "")
     return "Machine list wiped"
 
