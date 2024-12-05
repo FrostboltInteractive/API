@@ -114,15 +114,13 @@ def getMachineList():
     data = dataGet("Machines")
     machines = [] 
     mac = data.split('\n')
-    if(type(machines) == str):
-        machines = [mac]
+    if(type(mac) == str):
+        mac = [mac]
     else:
-        machines = mac
-    if(data is None):
-        return ["error"]
-
-    for line in machines:
-        print(type(arr))
+        mac = mac
+    
+    for line in mac:
+        print(type(line))
         arr = line.split(',')
         if(len(arr) < 7):
             continue
