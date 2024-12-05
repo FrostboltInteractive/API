@@ -280,7 +280,7 @@ def handleGetMachineIp():
 @app.route('/mtest', methods=['POST'])
 def handleMTest():
     data = request.get_json()
-    requests.get(data['ip'] + " " + data['port'] + "/test")
+    requests.get("https://" + data['ip'] + ":" + data['port'] + "/test")
     return "successapi"
 
 @app.route('/wipeMachineList', methods=['GET'])
