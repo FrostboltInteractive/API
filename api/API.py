@@ -189,11 +189,15 @@ def getNextMachineId():
         return 0
     ids = []
     for i in machines:
-        ids.append(i['machineID'])
+        ids.append(i['id'])
     for i in range(0, len(ids)):
         if(i not in ids):
             return i
     return len(ids)
+
+def wipeMachineList(id):
+    dataStore("Machines", "")
+    return "Machine list wiped"
 
 def getMachineIp(id):
     #TODO get the ip of a machine
@@ -276,3 +280,8 @@ def handleGetMachineIp():
 def handleMTest():
     data = request.get_json()
     return "successapi"
+
+@app.route('/wipeMachineList', methods=['GET'])
+def handleWipeMachineList():
+    res = wipeMachineList()
+    return Response(json.dumps(res), mimetype='applicati on/json')
