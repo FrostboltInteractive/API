@@ -13,7 +13,7 @@ def getServerList():
     # Get the absolute path of the current file
     dat = dataGet("Servers")
     if dat is None:
-        return []
+        return []   
     arr = dat.split('\n')
     for line in arr:
         line = str(line)
@@ -47,7 +47,7 @@ def addServer(data):
     serv = dataGet("Servers")
     if(serv is None):
         serv = ""
-    s = f"{data['ip']},{data['port']},{data['status']},{data['region']},{data['playerCount']},{data['shipCount']},{nextServerId()},{data['machineID']}\n"
+    s = f"{data['ip']},{data['port']},{data['status']},{data['region']},{data['playerCount']},{data['shipCount']},{nextServerId()},{data['machineID']},{data['connectedPlayers']}\n"
     dataStore("Servers", serv + s)
     # Here you would typically append the new server to your data store
     # For this example, we'll just return the new server
@@ -93,15 +93,13 @@ def getServer(id):
     #TODO get a server by id
     return ""
 
-def startServer(machineID):
+def startServer():
     #TODO start a server
     least = leastLoadedMachine()
-    machineIP = "192.168.1.100"  # Replace with the actual IP address of the Java server
-    machinePort = 8080
-    machineURL = f"http://{machineIP}:{machinePort}/startServer"
+    machineURL = f"http://{least['ip']}:{least['port']}/startServer"
     try:
         response = request.get(machineURL)
-        return response.text
+        return response.content
     except Exception as e:  
         return str(e)
     return "FAIL"
@@ -147,8 +145,12 @@ def getMachineList():
     return machines
 
 def leastLoadedMachine():
-    #TODO get the machine with the least amount of servers
-    return ""
+    machines = getMachineList()
+    min = machines[0]
+    for mac in machines:
+        if(mac.serverCount < min.serverCount):
+            min = mac
+    return min
 
 def addMachine(data):
     #1: ip
@@ -223,12 +225,45 @@ def dataGet(key): #takes in key and returns the value from redis
         return val.decode('utf-8')  # Decode bytes to string
     return None
 
+def findServer(region, ip):
+    servers = getServerList()
+    filt = []
+    for i in servers:
+        if(i['region'] == region & i['playerCount'] < 10):
+            filt.append(i)
+    if(len(filt) == 0):
+        #start new server
+        res = startServer()
+        #return the new server
+        return res 
+    #have all eligable servers ping the client
+    pings = []
+    for server in filt:
+        response = requests.get("http://" + server['ip'] + ":" + server['port'] + "/ping")
+        pings[server['id']] = response.content
+        print(response.content)
+    #return the server with the lowest ping
+    print(pings)
+    m = 0
+    for i in pings:
+        if(pings[i] < pings[m]):
+            m = i
+    return servers[m]
+
 
 app = Flask(__name__)
 
 @app.route('/test')
 def test():
     return "Hello, World!"
+
+@app.route('/connect', methods=['POST'])
+def handleConnect():
+    data = request.get_json()
+    #step 1 have all servers in the same region and arent full ping the client and the one with the lowest ping will be the chosen server
+    server = findServer("USEAST", data['ip'])
+    #step 2 send client the ip and port of the chosen server
+    return server['ip'] + ":" + server['port']  
 
 @app.route('/getServerList')
 def handleGetServerList():
@@ -259,6 +294,12 @@ def handleMachineHeartbeat():
     data = request.get_json()
     #TODO handle machine heartbeat
     return ""
+
+@app.route('/serverHeartBeat', methods=['POST'])
+def handleServerHeartBeat():
+    data = request.get_json()
+    #TODO handle server heartbeat
+    return ""  
 
 @app.route('/addMachine', methods=['POST']) 
 def handleAddMachine():
