@@ -330,3 +330,8 @@ def handleMTest():
 def handleWipeMachineList():
     res = wipeMachineList()
     return Response(json.dumps(res), mimetype='application/json')
+
+@app.route('/setDB', methods=['POST'])
+def handleSetDB():
+    data = request.get_json()
+    return "not implemented"
